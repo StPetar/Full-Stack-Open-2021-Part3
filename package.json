@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+		"start": "node index.js",
+		"dev": "nodemon index.js",
+		"build:ui": "rm -rf build && cd ./phonebook && npm run build --prod && cp -r build ../",
+		"deploy": "git push heroku master",
+		"deploy:full": "npm run build:ui && git add . && git commit -m build && npm run deploy",
+		"logs:prod": "heroku logs --tail",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "eslint ."
+	},"repository": {
+		"type": "git",
+		"url": "git+https://github.com/StPetar/Full-Stack-Open-2021-Part3"
+	},
   "author": "",
   "license": "ISC",
   "description": "",
