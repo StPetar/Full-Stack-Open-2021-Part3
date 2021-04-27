@@ -24,18 +24,18 @@ app.use(morgan((tokens, request, response) => {
 app.get('/api/persons', (request, response) => {
 	Person.find({}).then(persons => {
 		response.json(persons)
-	  })
+	})
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
-	Person.findById(request.params.id).then((person) =>{
+	Person.findById(request.params.id).then(person => {
 		person ? response.json(person) : response.status(404).end()
 	})
-	.catch(error => next(error))
+		.catch((error) => next(error))
 })
 
-app.get('/info', (request, response) =>{
-	Person.find({}).then(person =>{
+app.get('/info', (request, response) => {
+	Person.find({}).then(person => {
 		response.send(
 			`<p>Phonebook has info for ${person.length} people</p>
 			 <p>${new Date()}</p>`
@@ -53,13 +53,13 @@ app.post('/api/persons', (request, response, next) => {
 
 	newPerson.save().then(savedPerson => {
 		response.json(savedPerson)
-	})
+	}).catch((error) => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
 	Person.findByIdAndRemove(request.params.id).then( () => {
 		response.status(204).end()
-	}).catch(error => next(error))
+	}).catch((error) => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -72,7 +72,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 	Person.findByIdAndUpdate(request.params.id, person).then(updatedPerson => {
 		response.json(updatedPerson)
 	})
-	.catch(error => next(error))
+		.catch((error) => next(error))
 })
 const errorHandler = (error, request, response, next) => {
 	console.log(error.message)
@@ -82,12 +82,12 @@ const errorHandler = (error, request, response, next) => {
 	} else if (error.name === 'ValidationError') {
 		return response.status(400).json({ error: error.message })
 	}
-	next(error);
+	next(error)
 }
 
 app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}`);
+	console.log(`Server is running on port ${PORT}`)
 })

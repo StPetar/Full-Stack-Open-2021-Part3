@@ -10,7 +10,8 @@
     "deploy:full": "npm run build:ui && git add . && git commit -m build && npm run deploy",
     "logs:prod": "heroku logs --tail",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js,.jsx ."
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,11 @@
     "express": "^4.17.1",
     "heroku": "^7.2.0",
     "mongoose": "^5.12.5",
+    "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^7.25.0",
     "nodemon": "^2.0.7"
   }
 }
