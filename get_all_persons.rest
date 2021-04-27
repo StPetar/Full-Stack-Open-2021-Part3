@@ -1,0 +1,13 @@
+GET http://localhost:3001/api/persons
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Petar Stoyanov",
+    "number": "358 31923 12314"
+}
+###
+GET http://localhost:3001/info
+###
